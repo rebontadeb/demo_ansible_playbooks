@@ -1,0 +1,13 @@
+---
+- name: List files in /root directory
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: List files in /root directory
+      ansible.builtin.shell: ls /root
+      register: root_files
+
+    - name: Display files
+      ansible.builtin.debug:
+        msg: "{{ root_files.stdout_lines }}"
