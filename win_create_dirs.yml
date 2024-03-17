@@ -1,0 +1,8 @@
+---
+- name: Manage files and services on Windows
+  hosts: all 
+  tasks:
+    - name: Create a directory
+      win_file:
+        path: C:\Temp\example
+        state: directory
