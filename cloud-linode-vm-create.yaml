@@ -5,7 +5,6 @@
     - name: Create a Linode instance    
       linode.cloud.instance:
         api_token: "{{ linode_api_token }}"
-        label: my-ansible-linode
         type: g6-nanode-1
         region: us-east
         image: linode/ubuntu22.04
