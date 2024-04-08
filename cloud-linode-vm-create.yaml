@@ -4,16 +4,16 @@
   tasks:
     - name: Create a Linode instance    
       linode.cloud.instance:
-        api_token: {{ linode_api_token }}
+        api_token: "{{ linode_api_token }}"
         label: my-ansible-linode
         type: g6-nanode-1
         region: us-east
         image: linode/ubuntu22.04
-        root_pass: {{ linode_root_pass }}
+        root_pass: "{{ linode_root_pass }}"
         state: present
-        label: {{ linode_label }}
+        label: "{{ linode_label }}"
     
     - name: Get info about an instance by label
       linode.cloud.instance_info:
-        api_token: {{ linode_api_token }}
-        label: {{ linode_label }}
+        api_token: "{{ linode_api_token }}"
+        label: "{{ linode_label }}"
