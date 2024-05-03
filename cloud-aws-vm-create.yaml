@@ -9,14 +9,12 @@
         aws_secret_key: "{{ aws_secret_key }}"
         key_name: "{{ key_name }}"
         region: "{{ region }}"
-        group: "{{ security_group }}"
         instance_type: "{{ instance_type }}"
-        image:
-          id: "{{ ami }}"
+        image_id: "{{ ami }}"
         wait: yes
         wait_timeout: 500
         count: "{{ count }}"
-        vpc_subnet_id: "{{ subnet_id }}"
+        subnet_id: "{{ subnet_id }}"
       register: ec2_instance
 
     - name: Add newly created EC2 instance to host group
