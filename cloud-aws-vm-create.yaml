@@ -14,7 +14,6 @@
         wait: yes
         wait_timeout: 500
         count: "{{ count }}"
-        subnet_id: "{{ subnet_id }}"
       register: ec2_instance
 
     - name: Add newly created EC2 instance to host group
