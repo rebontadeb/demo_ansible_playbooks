@@ -7,7 +7,6 @@
       amazon.aws.ec2_instance:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        key_name: "{{ key_name }}"
         region: "{{ region }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami }}"
