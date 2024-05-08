@@ -5,7 +5,7 @@
 
   tasks:
     - name: delete test directory from /root location
-      ansible.builtin.shell: mkdir -p  /root/demo-test
+      ansible.builtin.shell: rm -rf  /root/demo-test
       register: delete_dir
 
     - name: Display directory deletion
