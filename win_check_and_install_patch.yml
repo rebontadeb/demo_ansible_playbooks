@@ -9,7 +9,7 @@
     - name: Check for available Windows updates
       win_updates:
         state: present
-        category_name: "SecurityUpdates"
+        category_name: "*"
       register: updates
 
     - name: Display available updates (optional)
