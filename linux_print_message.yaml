@@ -5,5 +5,9 @@
 
   tasks:
     - name: Print-Message
-      ansible.builtin.shell: echo "{{ message }}"
-      register: delete_dir
+      ansible.builtin.shell: echo "Welcome :{{ message }}"
+      register: print_message
+
+    - name: Display message
+      ansible.builtin.debug:
+        msg: "{{ print_message.stdout_lines }}"
