@@ -5,35 +5,18 @@
   tasks:
     - name: Launch EC2 Instance
       amazon.aws.ec2_instance:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
+#        aws_access_key: "{{ aws_access_key }}"
+#        aws_secret_key: "{{ aws_secret_key }}"
         region: "{{ region }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami }}"
+        security_group: "{{ security_group }}"
         wait: yes
         wait_timeout: 500
         count: "{{ count }}"
       register: ec2_instance
 
-    - name: Add newly created EC2 instance to host group
-      add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: launched_ec2
-      with_items: "{{ ec2_instance.instances }}"
-
-- name: Configure EC2 Instance
-  hosts: launched_ec2
-  become: yes
-  become_user: ec2-user
-  tasks:
-    - name: Update packages and install Apache
-      yum:
-        name: httpd
-        state: present
-
-    - name: Start Apache service
-      service:
-        name: httpd
-        state: started
-        enabled: yes
+    - name: Display Output
+      ansible.builtin.debug:
+        msg: "{{ ec2_instance.stdout_lines }}"
 
