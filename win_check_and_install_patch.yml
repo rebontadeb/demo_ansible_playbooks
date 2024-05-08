@@ -1,6 +1,7 @@
 - name: Manage Updates and Patching on Windows
   hosts: all 
-  become: true
+#  become: true
+  become_method: runas
   collections:
     - ansible.windows
 
