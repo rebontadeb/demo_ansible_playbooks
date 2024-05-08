@@ -10,7 +10,6 @@
         region: "{{ region }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ ami }}"
-        security_group: "{{  }}"
         wait: yes
         wait_timeout: 500
         count: "{{ count }}"
