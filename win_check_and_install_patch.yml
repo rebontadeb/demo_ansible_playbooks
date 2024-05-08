@@ -1,0 +1,26 @@
+- name: Manage Updates and Patching on Windows
+  hosts: all 
+  become: true
+  collections:
+    - ansible.windows
+
+  tasks:
+    - name: Check for available Windows updates
+      win_updates:
+        state: present
+        category_name: "{{ update_category }}"
+      register: updates
+
+    - name: Display available updates (optional)
+      debug:
+        msg: "{{ updates.result }}"
+
+#    - name: Install available Windows updates
+#      win_updates:
+#        state: present
+#        category_name: "{{ update_category }}"
+#        reboot: yes
+#      when: updates.result.available != 0
+
+  vars:
+    update_category: "*"  # Update all categories by default
