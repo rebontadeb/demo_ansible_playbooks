@@ -5,6 +5,8 @@
     - name: Launch an EC2 Instance
       amazon.aws.ec2_instance:
         name: "Test-Ansible-Create-EC2"
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
         key_name: "{{ key_name }}"
         instance_type: "{{ instance_type }}"
         count: "{{ count }}"
