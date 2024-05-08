@@ -1,0 +1,9 @@
+---
+- name: Print-Message
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Print-Message
+      ansible.builtin.shell: echo "{{ message }}"
+      register: delete_dir
