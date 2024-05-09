@@ -5,8 +5,8 @@
     - name: Launch an EC2 Instance
       amazon.aws.ec2_instance:
         name: "Test-Ansible-Create-EC2"
-        access_key: "{{ AWS_ACCESS_KEY_ID }}"
-        secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        access_key: "'{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}'"
+        secret_key: "'{{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}'"
         instance_type: "{{ instance_type }}"
         count: "{{ count }}"
         wait: yes

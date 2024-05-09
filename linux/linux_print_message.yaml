@@ -12,5 +12,3 @@
       ansible.builtin.debug:
         msg: 
           - "{{ print_message.stdout_lines }}"
-          - "'{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}'"
-          - "'{{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}'"
