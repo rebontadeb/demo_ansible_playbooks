@@ -1,0 +1,8 @@
+--- 
+- name: Create AWS EC2 Instance 
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Create AWS EC2 Instance
+    

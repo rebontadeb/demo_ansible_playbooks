@@ -11,3 +11,10 @@
     - name: Display message
       ansible.builtin.debug:
         msg: "{{ print_message.stdout_lines }}"
+
+    - name: Display message
+      ansible.builtin.debug:
+        msg: 
+          - "'{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}'"
+          - "'{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}'"
+
