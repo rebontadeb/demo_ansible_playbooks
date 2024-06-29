@@ -3,7 +3,7 @@
   gather_facts: no
   become: true
   become_method: runas
-  become_user: {{ admin_user }}
+  become_user: "{{ admin_user }}"
 
   vars:
     reboot_after_updates: no  
