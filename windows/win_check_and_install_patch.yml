@@ -1,8 +1,10 @@
 ---
 - hosts: all
+  gather_facts: no
   become: true
   become_method: runas
-  gather_facts: no
+  become_user: {{ admin_user }}
+
   vars:
     reboot_after_updates: no  
   tasks:
