@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: true
+  become_method: runas
   connection: winrm
   vars:
     reboot_after_updates: no  
