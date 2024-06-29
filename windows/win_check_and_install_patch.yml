@@ -2,14 +2,18 @@
 - hosts: all
   become: true
   become_method: runas
+  gather_facts: no
   vars:
     reboot_after_updates: no  
   tasks:
-    - name: Check for available updates 
-      win_updates:
+    - name: Check for available updates
+      ansible.windows.win_updates:
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
         state: searched
       register: available_updates
 
     - name: Print available updates
       debug:
-        var: available_updates.stdout_lines
+        var: available_updates
