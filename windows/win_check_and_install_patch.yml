@@ -1,10 +1,9 @@
 ---
 - hosts: all
   gather_facts: no
-  become: true
+  become: yes
   become_method: runas
-  become_user: "{{ admin_user }}"
-
+  become_user: amsible 
   vars:
     reboot_after_updates: no  
   tasks:
