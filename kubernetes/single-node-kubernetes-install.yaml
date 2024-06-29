@@ -1,0 +1,26 @@
+---
+- name: Check Kubernetes Prerequisite.
+  hosts: all
+  tasks:
+    - name: Gather facts
+      ansible.builtin.setup:
+    - name: Prerequisite block
+      block:
+        - name: Display server IP address
+          ansible.builtin.debug:
+            msg: "The server IP address is {{ ansible_default_ipv4.address }}"
+
+        - name: Check if CPU count is more than 2
+          fail:
+            msg: "The CPU count is 2 or less. Failing the playbook."
+          when: ansible_processor_vcpus <= 2
+
+        - name: Continue if CPU count is more than 2
+          debug:
+            msg: "The CPU count is more than 2."
+          when: ansible_processor_vcpus > 2
+
+      rescue:
+        - name: Fail the playbook if the dependent task fails
+          fail:
+            msg: "A critical task has failed, stopping further execution."

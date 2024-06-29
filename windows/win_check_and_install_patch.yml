@@ -1,27 +1,13 @@
-- name: Manage Updates and Patching on Windows
-  hosts: all 
-#  become: true
-  become_method: runas
-  collections:
-    - ansible.windows
+---
+- hosts: all
+  become: true
+  connection: winrm
+  vars:
+    reboot_after_updates: no  
 
   tasks:
-    - name: Check for available Windows updates
+    - name: Check for available updates (optional)
       win_updates:
-        state: present
-        category_name: 'SecurityUpdates'
-      register: updates
+        state: search
+      register: available_updates
 
-    - name: Display available updates (optional)
-      debug:
-        msg: "{{ updates.result }}"
-
-#    - name: Install available Windows updates
-#      win_updates:
-#        state: present
-#        category_name: "{{ update_category }}"
-#        reboot: yes
-#      when: updates.result.available != 0
-
-  vars:
-    update_category: "*"  # Update all categories by default
