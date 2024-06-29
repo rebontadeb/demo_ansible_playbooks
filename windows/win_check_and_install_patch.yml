@@ -1,15 +1,14 @@
 ---
 - hosts: all
-  become: true
-  become_method: runas
   connection: winrm
   vars:
     reboot_after_updates: no  
-    become_user: amsible
-
   tasks:
-    - name: Check for available updates (optional)
+    - name: Check for available updates 
       win_updates:
         state: searched
       register: available_updates
 
+    - name: Print available updates
+      debug:
+        var: available_updates.stdout_lines
