@@ -10,6 +10,6 @@
   tasks:
     - name: Check for available updates (optional)
       win_updates:
-        state: searchd
+        state: searched
       register: available_updates
 
