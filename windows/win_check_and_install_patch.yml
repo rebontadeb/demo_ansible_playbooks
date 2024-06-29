@@ -5,6 +5,7 @@
   connection: winrm
   vars:
     reboot_after_updates: no  
+    become_user: amsible
 
   tasks:
     - name: Check for available updates (optional)
