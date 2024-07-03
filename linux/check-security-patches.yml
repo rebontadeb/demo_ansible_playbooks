@@ -15,4 +15,4 @@
 
     - name: Display security updates
       debug:
-        var: security_updates
+        msg: "{{ security_updates.stdout.split('\n') }}"
