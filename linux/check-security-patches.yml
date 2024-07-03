@@ -1,16 +1,16 @@
 ---
-- name: Check for Security Patches in RHEL
+- name: Check for Security Patches in RHEL 9
   hosts: all
   become: true
 
   tasks:
-    - name: Install yum-plugin-security
+    - name: Ensure dnf-plugins-core is installed
       yum:
-        name: yum-plugin-security
+        name: dnf-plugins-core
         state: present
 
     - name: List available security updates
-      shell: yum updateinfo list security all
+      shell: dnf updateinfo list security
       register: security_updates
 
     - name: Display security updates
