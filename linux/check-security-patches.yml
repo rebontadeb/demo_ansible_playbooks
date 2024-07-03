@@ -15,4 +15,4 @@
 
     - name: Display security updates
       debug:
-        var: security_updates.stdout
+        var: security_updates
