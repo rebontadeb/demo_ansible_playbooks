@@ -1,5 +1,5 @@
 ---
-- name: Check for and Install Moderate Security Patches in RHEL / Fedora
+- name: Check for and Install "{{ sec_level }}" Security Patches in RHEL / Fedora
   hosts: all
   become: true
   ignore_unreachable: yes
