@@ -1,5 +1,5 @@
 ---
-- name: Check for Security Patches in RHEL / Fedora
+- name: Check for and Install Moderate Security Patches in RHEL / Fedora
   hosts: all
   become: true
   ignore_unreachable: yes
@@ -14,6 +14,19 @@
       shell: dnf updateinfo list security
       register: security_updates
 
-    - name: Display security updates
+    - name: Display all available security updates
       debug:
         msg: "{{ security_updates.stdout.split('\n') }}"
+
+    - name: Filter and install security updates
+      shell: |
+        updates=$(dnf updateinfo list security | grep -i "{{ sec_level }}" | awk '{print $3}')
+        if [ ! -z "$updates" ]; then
+          dnf update -y $updates
+        fi
+      register: update_result
+      changed_when: update_result.rc == 0
+
+    - name: Display applied moderate security updates
+      debug:
+        msg: "{{ update_result.stdout.split('\n') }}"
