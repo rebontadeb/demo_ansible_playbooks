@@ -1,21 +1,20 @@
 ---
-- hosts: all
-  gather_facts: no
+- name: Check for Windows Updates on Windows 11
+  hosts: windows
   become: yes
-  become_method: runas
-  become_user: amsible
-  vars:
-    reboot_after_updates: no
+  gather_facts: no
+
   tasks:
-    - name: Check for available updates
-      ansible.windows.win_updates:
+    - name: Check for Windows updates
+      win_updates:
         category_names:
-          - CriticalUpdates
           - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+          - FeaturePacks
         state: searched
-      register: available_updates
+      register: update_info
 
-    - name: Print available updates
+    - name: Display available updates
       debug:
-        var: available_updates
-
+        msg: "{{ update_info.updates }}"
