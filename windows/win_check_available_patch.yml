@@ -10,7 +10,7 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-        register: available_updates
+      register: available_updates
 
 
     - name: Display installed security updates
