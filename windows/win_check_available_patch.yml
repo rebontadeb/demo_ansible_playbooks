@@ -4,12 +4,12 @@
   gather_facts: no
   tasks:
     - name: Ensure the win_updates module is available
-      win_feature:
+      ansible.windows.win_feature:
         name: PowerShell
         state: present
 
     - name: Check for available updates
-      win_updates:
+      ansible.windows.win_updates:
         category_names: ['CriticalUpdates', 'SecurityUpdates','UpdateRollups','FeaturePacks']
       register: update_result
 
