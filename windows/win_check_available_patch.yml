@@ -13,8 +13,6 @@
         category_names: ['CriticalUpdates', 'SecurityUpdates','UpdateRollups','FeaturePacks']
       register: update_result
 
-
-
     - name: Display update summary
       debug:
         msg: "Updates installed: {{ update_result.updates }}"
