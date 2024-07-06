@@ -1,13 +1,14 @@
-- name: Run Updates on App Servers and wait 10 mins
-  hosts: all
-  connection: winrm
-
+---
+- name: Patch Windows Servers
+  hosts: windows
+  gather_facts: no
   tasks:
-    ansible.windows.win_updates:
-      category_names:
-        - CriticalUpdates
-        - DefinitionUpdates
-        - SecurityUpdates
-        - Updates
-    reboot: yes
-    reboot_timeout: 600
+    - name: Install Windows updates
+      ansible.windows.win_updates:
+        category_names:
+          - CriticalUpdates
+          - DefinitionUpdates
+          - SecurityUpdates
+          - Updates
+        reboot: no
+        reboot_timeout: 600
