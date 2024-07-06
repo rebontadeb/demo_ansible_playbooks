@@ -1,0 +1,22 @@
+---
+- name: Check for and Install Security Updates on Windows 11
+  hosts: windows
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Check for security updates
+      ansible.windows.win_updates:
+        category_names: ["SecurityUpdates"]
+      register: update_info
+
+    - name: Install moderate security updates
+      ansible.windows.win_updates:
+        category_names: ["SecurityUpdates"]
+        state: installed
+      register: installed_updates
+      when: update_info.updates | length > 0
+
+    - name: Display installed security updates
+      debug:
+        msg: "{{ installed_updates }}"
