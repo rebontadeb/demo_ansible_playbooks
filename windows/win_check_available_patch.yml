@@ -1,6 +1,7 @@
 ---
 - name: Check for Windows Updates on Windows
   hosts: all
+  become: true
   gather_facts: no
 
   tasks:
