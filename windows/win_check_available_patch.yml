@@ -1,6 +1,6 @@
 ---
 - name: Patch Windows Servers
-  hosts: windows
+  hosts: all
   gather_facts: no
   tasks:
     - name: Install Windows updates
