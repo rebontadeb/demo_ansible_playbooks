@@ -10,5 +10,9 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-        reboot: no
-        reboot_timeout: 600
+        register: available_updates
+
+
+    - name: Display installed security updates
+      debug:
+        msg: "{{ available_updates }}"
