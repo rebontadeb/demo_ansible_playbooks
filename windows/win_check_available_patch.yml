@@ -1,22 +1,21 @@
 ---
-- name: Check for Windows Updates on Windows
+- name: Patch Windows Servers
   hosts: all
-  become: true
   gather_facts: no
-  become_user: "amsible"
-
   tasks:
-    - name: Check for Windows updates
-      ansible.windows.win_updates:
-        category_names:
-          - SecurityUpdates
-          - CriticalUpdates
-          - UpdateRollups
-          - FeaturePacks
-        state: searched
-      register: update_info
+    - name: Ensure the win_updates module is available
+      win_feature:
+        name: PowerShell
+        state: present
 
-    - name: Display available updates
+    - name: Check for available updates
+      win_updates:
+        category_names: ['CriticalUpdates', 'SecurityUpdates','UpdateRollups','FeaturePacks']
+      register: update_result
+
+
+
+    - name: Display update summary
       debug:
-        msg: "{{ update_info.updates }}"
+        msg: "Updates installed: {{ update_result.updates }}"
 
