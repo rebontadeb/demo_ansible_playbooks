@@ -3,7 +3,8 @@
   hosts: all
   become: true
   gather_facts: no
-
+  become_user: amsible
+  become_password: ansible
   tasks:
     - name: Check for Windows updates
       win_updates:
@@ -18,3 +19,9 @@
     - name: Display available updates
       debug:
         msg: "{{ update_info.updates }}"
+
+
+  vars:
+    machine:
+      win_admin_user: '{{ ansible_user }}'
+      win_admin_password: '{{ ansible_password }}'
