@@ -1,19 +1,13 @@
----
-- name: Patch Windows Servers
+- name: Run Updates on App Servers and wait 10 mins
   hosts: all
-  gather_facts: no
+  connection: winrm
+
   tasks:
-    - name: Ensure the win_updates module is available
-      ansible.windows.win_feature:
-        name: PowerShell
-        state: present
-
-    - name: Check for available updates
-      ansible.windows.win_updates:
-        category_names: ['CriticalUpdates', 'SecurityUpdates','UpdateRollups','FeaturePacks']
-      register: update_result
-
-    - name: Display update summary
-      debug:
-        msg: "Updates installed: {{ update_result.updates }}"
-
+    ansible.windows.win_updates:
+      category_names:
+        - CriticalUpdates
+        - DefinitionUpdates
+        - SecurityUpdates
+        - Updates
+    reboot: yes
+    reboot_timeout: 600
