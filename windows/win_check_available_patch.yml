@@ -3,16 +3,24 @@
   hosts: all
   gather_facts: no
   tasks:
+    - name: Search for available Windows updates
+      ansible.windows.win_updates:
+        category_names:
+          - { { var_update } }
+        state: searched
+      register: available_updates
+
+    - name: Display available updates
+      debug:
+        msg: "{{ available_updates.updates }}"
+
     - name: Install Windows updates
       ansible.windows.win_updates:
         category_names:
-          - CriticalUpdates
-          - DefinitionUpdates
-          - SecurityUpdates
-          - Updates
-      register: available_updates
-
+          - { { var_update } }
+      when: available_updates.updates | length > 0
+      register: installed_updates
 
     - name: Display installed security updates
       debug:
-        msg: "{{ available_updates }}"
+        msg: "{{ installed_updates }}"
