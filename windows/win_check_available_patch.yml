@@ -5,7 +5,7 @@
   tasks:
     - name: Search for available Windows updates
       ansible.windows.win_updates:
-        category_names:
+        category_names: # CriticalUpdates | DefinitionUpdates |  SecurityUpdates | Updates
           - "{{ var_update }}"
         state: searched
       register: available_updates
@@ -16,7 +16,7 @@
 
     - name: Install Windows updates
       ansible.windows.win_updates:
-        category_names:
+        category_names: # CriticalUpdates | DefinitionUpdates |  SecurityUpdates | Updates
           - "{{ var_update }}"
       when: available_updates.updates | length > 0
       register: installed_updates
