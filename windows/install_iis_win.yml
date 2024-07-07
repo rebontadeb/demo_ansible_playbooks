@@ -1,0 +1,43 @@
+---
+- name: Install and Configure IIS
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install IIS feature
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Ensure IIS is started and set to auto start
+      ansible.windows.win_service:
+        name: W3SVC
+        start_mode: auto
+        state: started
+
+    - name: Configure Default Document
+      ansible.windows.win_shell:
+        command: "Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/defaultDocument/files' -name '.' -value @{value='index.html'} -location 'Default Web Site'"
+        args:
+          executable: powershell
+
+    - name: Create a default HTML file
+      ansible.windows.win_copy:
+        dest: "C:\\inetpub\\wwwroot\\index.html"
+        content: |
+          <html>
+          <head>
+              <title>Welcome to IIS!</title>
+          </head>
+          <body>
+              <h1>Success! IIS is working!</h1>
+          </body>
+          </html>
+
+    - name: Open HTTP port in the firewall
+      ansible.windows.win_firewall_rule:
+        name: "Open port 80"
+        enable: yes
+        localport: 80
+        action: allow
+        direction: in
+        protocol: TCP

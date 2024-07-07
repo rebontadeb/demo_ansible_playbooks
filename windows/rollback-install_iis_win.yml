@@ -1,0 +1,28 @@
+---
+- name: Rollback IIS Installation
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Stop IIS service
+      ansible.windows.win_service:
+        name: W3SVC
+        state: stopped
+
+    - name: Uninstall IIS feature
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: absent
+
+    - name: Remove default HTML file
+      ansible.windows.win_file:
+        path: "C:\\inetpub\\wwwroot\\index.html"
+        state: absent
+
+    - name: Remove HTTP port firewall rule
+      ansible.windows.win_firewall_rule:
+        name: "Open port 80"
+        enable: no
+        localport: 80
+        action: allow
+        direction: in
+        protocol: TCP
