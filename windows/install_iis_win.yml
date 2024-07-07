@@ -33,11 +33,11 @@
           </body>
           </html>
 
-    - name: Open HTTP port in the firewall
-      ansible.windows.win_firewall_rule:
-        name: "Open port 80"
-        enable: yes
-        localport: 80
-        action: allow
-        direction: in
-        protocol: TCP
+#   - name: Open HTTP port in the firewall
+#     ansible.windows.win_firewall_rule:
+#       name: "Open port 80"
+#       enable: yes
+#       localport: 80
+#       action: allow
+#       direction: in
+#       protocol: TCP
