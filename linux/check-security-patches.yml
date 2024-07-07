@@ -18,6 +18,7 @@
       debug:
         msg: "{{ security_updates.stdout.split('\n') }}"
 
+    # Critical,Important,Moderate,Low
     - name: Filter and install security updates
       shell: |
         updates=$(dnf updateinfo list security | grep -i "{{ sec_level }}" | awk '{print $3}')
