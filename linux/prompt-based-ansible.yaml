@@ -1,0 +1,30 @@
+---
+- name: Example playbook with vars_prompt
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+    - name: "username"
+      prompt: "Please enter your username"
+      private: no # Set to yes if you want to hide the input
+
+    - name: "password"
+      prompt: "Please enter your password"
+      private: yes # Hides the input
+
+    - name: "age"
+      prompt: "Please enter your age"
+      private: no
+
+  tasks:
+    - name: Print the username
+      debug:
+        msg: "The entered username is {{ username }}"
+
+    - name: Print the age
+      debug:
+        msg: "The entered age is {{ age }}"
+
+    - name: Print a masked password (not recommended for actual use)
+      debug:
+        msg: "The entered password is {{ password }} (this should be kept secret)"
