@@ -1,0 +1,24 @@
+---
+- name: Rollback the package installation
+  hosts: all
+  become: yes
+  vars:
+    package_name: {{ package }} 
+
+  tasks:
+    - name: Check if the package is installed
+      command: rpm -q {{ package_name }}
+      register: package_installed
+      ignore_errors: yes
+
+    - name: Remove the package
+      yum:
+        name: "{{ package_name }}"
+        state: absent
+      when: package_installed.rc == 0
+
+    - name: Confirm the package removal
+      debug:
+        msg: "The package {{ package_name }} was removed."
+      when: package_installed.rc == 0
+

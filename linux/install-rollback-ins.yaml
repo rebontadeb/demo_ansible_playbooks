@@ -1,0 +1,24 @@
+---
+- name: Install a package
+  hosts: all
+  become: yes
+  vars:
+    package_name: {{ package }} 
+
+  tasks:
+    - name: Check if the package is already installed
+      command: rpm -q {{ package_name }}
+      register: package_installed
+      ignore_errors: yes
+
+    - name: Install the package
+      yum:
+        name: "{{ package_name }}"
+        state: present
+      when: package_installed.rc != 0
+
+    - name: Record the installation status
+      debug:
+        msg: "The package {{ package_name }} was installed."
+      when: package_installed.rc != 0
+
