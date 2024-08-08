@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    package_name: {{ package }} 
+    package_name: httpd 
 
   tasks:
     - name: Check if the package is installed
