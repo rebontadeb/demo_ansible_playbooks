@@ -1,0 +1,11 @@
+- name: List AD Users
+  hosts: all
+  tasks:
+    - name: Get AD Users
+      win_shell: Get-ADUser -Filter * | Select-Object SamAccountName
+      register: ad_users
+
+    - name: Show AD Users
+      debug:
+        var: ad_users.stdout_lines
+
