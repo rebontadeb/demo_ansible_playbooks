@@ -1,0 +1,23 @@
+---
+- name: Create a new AD user
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Create AD user
+      ansible.windows.win_user:
+        name: {{ name }} 
+        password: {{ password }} 
+        user_cannot_change_password: yes
+        password_never_expires: yes
+        fullname: {{ name }} 
+        description: "New User for the AD"
+        groups:
+          - "Domain Users"
+        state: present
+      register: user_create
+
+    - name: Check if the user was created
+      debug:
+        var: user_create
+
