@@ -6,11 +6,11 @@
   tasks:
     - name: Create AD user
       ansible.windows.win_user:
-        name: {{ name }} 
-        password: {{ password }} 
+        name: "{{ name }}" 
+        password: "{{ password }}" 
         user_cannot_change_password: yes
         password_never_expires: yes
-        fullname: {{ name }} 
+        fullname: "{{ name }}" 
         description: "New User for the AD"
         groups:
           - "Domain Users"
