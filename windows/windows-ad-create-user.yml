@@ -1,7 +1,6 @@
 ---
 - name: Create a new AD user
   hosts: all
-  become: yes
   gather_facts: no
   tasks:
     - name: Create AD user
