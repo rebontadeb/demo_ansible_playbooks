@@ -5,7 +5,7 @@
 
   tasks:
     - name: Create test directory /root location
-      ansible.builtin.shell: mkdir -p  /root/demo-test
+      ansible.builtin.shell: mkdir -p  /root/demo-test-19-dec-2024
       register: create_dir
 
     - name: Display directory creation
