@@ -1,0 +1,30 @@
+- name: Create a user in RHEL
+  hosts: all
+  become: true
+  ignore_unreachable: yes
+  vars:
+    user_password: "{{ lookup('password', '/dev/null length=12 chars=ascii_letters,digits') | password_hash('sha512') }}"
+
+  tasks:
+    - name: Create a new user
+      user:
+        name: "{{ username }}"
+        password: "{{ user_password }}"
+        shell: /bin/bash
+        home: /home/"{{ username }}"
+        create_home: yes
+        groups: wheel
+        state: present
+
+    - name: Display generated password
+      debug:
+        msg: "User '{{ username }}' created with password: {{ user_password | password_hash('sha512') }}"
+
+
+
+#    - name: Ensure the user has sudo privileges
+#      copy:
+#        dest: /etc/sudoers.d/"{{ username }}"
+#        content: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+#        mode: '0440'
+
