@@ -4,14 +4,19 @@
   tasks:
 
     - name: Stop httpd service if running
-      shell: |                
-          systemctl stop httpd 
+      ansible.builtin.service:
+        name: httpd
+        state: stopped
+        enabled: no
+      ignore_errors: yes  # Just in case it's not running
 
     - name: Uninstall httpd package
-      shell: |                
-          dnf remove httpd -y
+      ansible.builtin.package:
+        name: httpd
+        state: absent
 
     - name: Remove leftover configuration (optional)
-      shell: |                
-          systemctl daemon-reload
-          
+      ansible.builtin.file:
+        path: /etc/httpd
+        state: absent
+      ignore_errors: yes
