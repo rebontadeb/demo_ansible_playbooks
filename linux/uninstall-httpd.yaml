@@ -1,9 +1,17 @@
 ---
-- name: Un-install httpd in rhel
+- name: Uninstall Apache HTTPD
   hosts: all
   tasks:
-    - name: Remove httpd
-      ansible.builtin.package:
-        name: httpd
-        state: absent
-        
+
+    - name: Stop httpd service if running
+      shell: |                
+          systemctl stop httpd 
+
+    - name: Uninstall httpd package
+      shell: |                
+          dnf remove httpd -y
+
+    - name: Remove leftover configuration (optional)
+      shell: |                
+          systemctl daemon-reload
+          
