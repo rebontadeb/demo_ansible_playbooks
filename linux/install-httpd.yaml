@@ -1,0 +1,9 @@
+---
+- name: Install httpd in rhel
+  hosts: all
+  tasks:
+    - name: Install httpd
+      become: true
+      ansible.builtin.package:
+        name: httpd
+        state: present
