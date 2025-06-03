@@ -1,6 +1,6 @@
 ---
 - name: RHEL 9 to 10 Upgrade - Phase 1 (Pre-upgrade)
-  hosts: rhel9_hosts
+  hosts: all
   become: yes
   gather_facts: yes
   vars:
