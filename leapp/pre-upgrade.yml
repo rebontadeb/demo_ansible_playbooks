@@ -23,6 +23,7 @@
 
     - name: Run pre-upgrade check
       command: leapp preupgrade
+      args: "--target 10.0"
       register: preupgrade_result
       failed_when: "'FAIL' in preupgrade_result.stderr"
 
