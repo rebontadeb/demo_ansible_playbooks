@@ -15,11 +15,11 @@
           - leapp-upgrade
         state: present
 
-    - name: Copy required upgrade data (custom answers, if any)
-      copy:
-        src: files/answerfile
-        dest: "{{ leapp_artifacts_dir }}/answerfile"
-        mode: 0644
+#    - name: Copy required upgrade data (custom answers, if any)
+#      copy:
+#        src: files/answerfile
+#        dest: "{{ leapp_artifacts_dir }}/answerfile"
+#        mode: 0644
 
     - name: Run pre-upgrade check
       command: leapp preupgrade
