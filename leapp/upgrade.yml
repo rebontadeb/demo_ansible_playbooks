@@ -1,6 +1,6 @@
 ---
 - name: RHEL 9 to 10 Upgrade - Phase 2 (Execute Upgrade)
-  hosts: rhel9_hosts
+  hosts: all
   become: yes
 
   tasks:
